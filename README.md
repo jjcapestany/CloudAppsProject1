@@ -20,46 +20,22 @@ uv sync
 cd frontend && npm install && cd ..
 ```
 
-### 2. Set up environment
-
-**Linux/macOS:**
+### 2. Start everything
 ```bash
-cp .env.example .env
-```
-
-**Windows (PowerShell):**
-```powershell
-Copy-Item .env.example .env
-```
-
-### 3. Start MongoDB
-
-**Linux/macOS:**
-```bash
+# Terminal 1 — MongoDB
 docker compose up -d
-```
 
-**Windows:**
-```powershell
-docker compose up -d
-```
-
-> On Windows, ensure Docker Desktop is running first.
-
-### 4. Run the backend
-```bash
+# Terminal 2 — Backend
 uv run flask run
-```
 
-### 5. Run the frontend (separate terminal)
-```bash
+# Terminal 3 — Frontend
 cd frontend
 npm run dev
 ```
 
-## Example Flow
+That's it. Open http://127.0.0.1:5173
 
-Here's what a typical dev session looks like:
+## Example Flow
 ```bash
 # Terminal 1 — Start MongoDB
 $ docker compose up -d
@@ -92,8 +68,6 @@ $ curl http://127.0.0.1:5000/api/test
 [{"message": "hello"}]
 ```
 
-Open http://127.0.0.1:5173 in your browser to see the React app.
-
 ## Access
 
 | Service  | URL                     |
@@ -112,7 +86,7 @@ Open http://127.0.0.1:5173 in your browser to see the React app.
 ├── frontend/           # React (Vite)
 ├── docker-compose.yml  # MongoDB
 ├── pyproject.toml      # Python dependencies
-└── .env.example        # Environment template
+└── .env                # Environment variables
 ```
 
 ## API Endpoints
@@ -133,6 +107,14 @@ Open http://127.0.0.1:5173 in your browser to see the React app.
 | Run frontend | `cd frontend && npm run dev` |
 | Add Python package | `uv add <package>` |
 | Add npm package | `cd frontend && npm install <package>` |
+
+## Production
+
+Override `.env` with production values:
+```
+MONGO_URI=mongodb://user:pass@prod-host:27017/myapp
+FLASK_DEBUG=0
+```
 
 ## Troubleshooting
 
