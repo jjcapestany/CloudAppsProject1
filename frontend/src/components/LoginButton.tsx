@@ -1,13 +1,30 @@
-import { useState } from "react"
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const LoginButton = () => {
+    const { isAuthenticated, logout, user } = useAuth();
+    const navigate = useNavigate();
 
-    //TODO: Replace with userlogin
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false)
+    const handleClick = async () => {
+        if (isAuthenticated) {
+            await logout();
+            navigate('/');
+        } else {
+            navigate('/login');
+        }
+    };
 
     return (
-        <button className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer" onClick={() => setIsUserLoggedIn(!isUserLoggedIn)}>
-            {isUserLoggedIn ? "LOG OUT" : "LOGIN"}
-        </button>
-    )
+        <div className="flex items-center gap-4">
+            {isAuthenticated && user && (
+                <span className="text-[#BF5700] text-sm">{user.email}</span>
+            )}
+            <button
+                className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer"
+                onClick={handleClick}
+            >
+                {isAuthenticated ? "LOG OUT" : "LOGIN"}
+            </button>
+        </div>
+    );
 }
