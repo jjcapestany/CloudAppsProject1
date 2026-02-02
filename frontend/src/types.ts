@@ -8,6 +8,7 @@ export type Hardware = {
     set: string,
     capacity: number,
     available: number,
+    checkedOut: number
 }
 
 export type User = {

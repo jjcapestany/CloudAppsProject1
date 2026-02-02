@@ -10,6 +10,7 @@ import { ForgotPasswordPage } from './pages/ForgotPasswordPage'
 import { ResetPasswordPage } from './pages/ResetPasswordPage'
 import { AuthProvider } from './context/AuthContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { HardwareManagement } from './components/HardwareManagement'
 
 function App() {
   return (
@@ -26,6 +27,11 @@ function App() {
             <Route path='/projects' element={
               <ProtectedRoute>
                 <Projects/>
+              </ProtectedRoute>
+            }/>
+            <Route path='/hardware' element={
+              <ProtectedRoute>
+                <HardwareManagement/>
               </ProtectedRoute>
             }/>
           </Routes>

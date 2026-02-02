@@ -20,10 +20,10 @@ export const LoginButton = () => {
                 <span className="text-[#BF5700] text-sm">{user.email}</span>
             )}
             <button
-                className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer"
+                className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer w-40 font-bold"
                 onClick={handleClick}
             >
-                {isAuthenticated ? "LOG OUT" : "LOGIN"}
+                <span className="mx-auto">{isAuthenticated ? "LOG OUT" : "LOGIN"}</span>
             </button>
         </div>
     );
