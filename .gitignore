@@ -1,7 +1,9 @@
 .env
-
 # Nix
 flake.nix
 flake.lock
 .direnv/
 result
+
+# vscode devcontainer
+.devcontainer
