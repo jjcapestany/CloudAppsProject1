@@ -1,21 +1,27 @@
 import jwt
-import bcrypt
 import secrets
 from datetime import datetime, timedelta, timezone
+from typing import Optional, Tuple
 from flask import current_app
+from api.auth.cipher import encrypt
+
+
+# Cipher parameters for demonstration
+CIPHER_N = 3
+CIPHER_D = 1
 
 
 def hash_password(password: str) -> str:
-    """Hash password using bcrypt with auto-generated salt."""
-    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    """Hash password using custom cipher (for demonstration only)."""
+    return encrypt(password, CIPHER_N, CIPHER_D)
 
 
 def verify_password(password: str, password_hash: str) -> bool:
     """Verify password against hash."""
-    return bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('utf-8'))
+    return encrypt(password, CIPHER_N, CIPHER_D) == password_hash
 
 
-def create_access_token(user_id: str, remember_me: bool = False) -> tuple[str, int]:
+def create_access_token(user_id: str, remember_me: bool = False) -> Tuple[str, int]:
     """Create JWT access token. Returns (token, expires_in_seconds)."""
     if remember_me:
         expires_delta = int(current_app.config['JWT_REMEMBER_ME_EXPIRES'])
@@ -48,7 +54,7 @@ def create_refresh_token(user_id: str, remember_me: bool = False) -> str:
     return jwt.encode(payload, current_app.config['JWT_SECRET_KEY'], algorithm='HS256')
 
 
-def decode_token(token: str) -> dict | None:
+def decode_token(token: str) -> Optional[dict]:
     """Decode and validate JWT token. Returns payload or None if invalid."""
     try:
         return jwt.decode(token, current_app.config['JWT_SECRET_KEY'], algorithms=['HS256'])

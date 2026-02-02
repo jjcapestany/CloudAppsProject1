@@ -1,5 +1,6 @@
 import re
 from datetime import datetime, timezone
+from typing import Tuple
 
 
 def validate_email(email: str) -> bool:
@@ -8,7 +9,7 @@ def validate_email(email: str) -> bool:
     return bool(re.match(pattern, email))
 
 
-def validate_password(password: str) -> tuple[bool, str]:
+def validate_password(password: str) -> Tuple[bool, str]:
     """Validate password strength. Returns (is_valid, error_message)."""
     if len(password) < 8:
         return False, 'Password must be at least 8 characters'
