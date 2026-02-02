@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { SplashPage } from './components/SplashPage'
 import { Footer } from './components/Footer'
 import { Projects } from './components/Projects'
+import { HardwareManagement } from './components/HardwareManagement'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
             <Route path='/' element={<SplashPage/>}/>
             <Route path='/projects' element={<Projects/>}/>
+            <Route path='/hardware' element={<HardwareManagement/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>
