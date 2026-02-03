@@ -53,6 +53,10 @@ def create_app():
     from api.projects.routes import projects_bp
     app.register_blueprint(projects_bp)
 
+    # Register hardware routes
+    from api.hardware.routes import hardware_bp
+    app.register_blueprint(hardware_bp)
+
     # Serve React (catch-all other than api routes) proxy should handle this in dev
     @app.route("/", defaults={"path": ""})
     @app.route("/<path:path>")
