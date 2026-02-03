@@ -5,7 +5,7 @@ import os
 def create_app():
     app = Flask(__name__)
     
-    client = MongoClient(os.environ.get("MONGO_URI", "mongodb://localhost:27017/myapp"))
+    client = MongoClient(os.environ.get("MONGODB_URI", "mongodb://localhost:27017/myapp"))
     app.db = client.get_database()
     
     from api.routes import bp

@@ -35,7 +35,7 @@ def create_app():
     mail.init_app(app)
 
     # Create a MongoDB client
-    client = MongoClient(os.environ.get("MONGO_URI", "mongodb://localhost:27017/myapp"))
+    client = MongoClient(os.environ.get("MONGODB_URI", "mongodb://localhost:27017/myapp"))
     app.db = client.get_database()
 
     # Create unique index on users email
