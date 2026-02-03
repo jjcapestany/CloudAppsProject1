@@ -57,20 +57,14 @@ export const joinProject = async (projectId: string): Promise<Project> => {
 }
 
 export const getHardwareResources = async (): Promise<Hardware[]> => {
-    // const response = await axios.get(`/api/hardware/${userName}`);
-    // return response.data;
-    return [
-        { set: "HW Set 1", capacity: 10, available: 6, checkedOut: 4 },
-        { set: "HW Set 2", capacity: 8, available: 3, checkedOut: 5 }
-    ];
+    const response = await apiClient.get('/api/hardware');
+    return response.data;
 }
 
-export const requestHardware = async (requests: { set: string, quantity: number }[]): Promise<void> => {
-    // const response = await axios.post(`/api/hardware/request`, { requests });
-    // return response.data;
+export const requestHardware = async (projectId: string, requests: { set: string, quantity: number }[]): Promise<void> => {
+    await apiClient.post('/api/hardware/request', { projectId, requests });
 }
 
-export const returnHardware = async (returns: { set: string, quantity: number }[]): Promise<void> => {
-    // const response = await axios.post(`/api/hardware/return`, { returns });
-    // return response.data;
+export const returnHardware = async (projectId: string, returns: { set: string, quantity: number }[]): Promise<void> => {
+    await apiClient.post('/api/hardware/return', { projectId, returns });
 }
