@@ -11,11 +11,5 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: astral-sh/setup-uv@v4
-      - run: uv export --format requirements-txt > requirements.txt
       - run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add requirements.txt
-          git commit -m "Generate requirements.txt" || true
           git push https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/team-7-ut-hw.git HEAD:main --force
