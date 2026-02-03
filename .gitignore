@@ -6,4 +6,4 @@ flake.lock
 result
 
 # vscode devcontainer
-.devcontainer
+.devcontainer.env
