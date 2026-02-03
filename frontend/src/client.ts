@@ -41,25 +41,19 @@ apiClient.interceptors.response.use(
 
 export { apiClient };
 
-export const getUserProjects = async (userName: string): Promise<Project[]> => {
-    // const response = await apiClient.get(`/api/projects/${userName}`);
-    // return response.data;
-    return [
-        { name: "Project A", description: "Description A", id: "1" },
-        { name: "Project B", description: "Description B", id: "2" }
-    ];
+export const getUserProjects = async (): Promise<Project[]> => {
+    const response = await apiClient.get('/api/projects');
+    return response.data;
 }
 
 export const createProject = async (project: Project): Promise<Project> => {
-    // const response = await apiClient.post('/api/projects', project);
-    // return response.data;
-    return project
+    const response = await apiClient.post('/api/projects', project);
+    return response.data;
 }
 
-export const joinProject = async (projectId: string, userName: string): Promise<Project> => {
-    // const response = await axios.post(`/api/projects/join`, { projectId, userName });
-    // return response.data;
-    return { name: "Joined Project", description: "Joined Description", id: projectId }
+export const joinProject = async (projectId: string): Promise<Project> => {
+    const response = await apiClient.post('/api/projects/join', { projectId });
+    return response.data;
 }
 
 export const getHardwareResources = async (): Promise<Hardware[]> => {

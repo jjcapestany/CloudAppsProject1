@@ -11,7 +11,7 @@ export const Projects = () => {
     const [newProject, setNewProject] = useState<Project>({name: "", description: "", id: ""})
 
     useEffect(() => {
-        getUserProjects("testUser").then(resp => {setMyProjects(resp)})
+        getUserProjects().then(resp => {setMyProjects(resp)})
     }, [])
     
     const onCreateSubmit = () => {
@@ -23,7 +23,7 @@ export const Projects = () => {
     }
 
     const onJoinSubmit = () => {
-        joinProject(joinProjectId, "testUser").then(resp => {
+        joinProject(joinProjectId).then(resp => {
             setMyProjects([...myProjects, resp])
             setJoinProjectId("")
             setIsJoinVisible(false)
