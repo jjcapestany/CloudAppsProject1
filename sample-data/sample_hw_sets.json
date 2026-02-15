@@ -1,8 +1,29 @@
 [ 
     {
-        "hw_type_id": "hw_set_1"
+        "_id": "1",
+        "name": "HW Set 1",
+        "capacity": 100,
+        "allocations": [
+            {
+                "projectid": "1",
+                "count": 10
+            },
+            {
+                "projectid": "3",
+                "count": 20
+            }
+        ]
     },
     {
-        "hw_type_id": "hw_set_2"
+        "_id": "2",
+        "name": "HW Set 2",
+        "capacity": 100,
+        "allocations": [
+            {
+                "projectid": "2",
+                "count": 5
+            }
+        ],
+        
     }
 ]
