@@ -27,7 +27,7 @@ def register():
     """Register a new user."""
     data = request.get_json() or {}
 
-    email = data.get('email', '').strip()
+    email = data.get('email', '').strip().lower()
     password = data.get('password', '')
     confirm_password = data.get('confirm_password', '')
 
