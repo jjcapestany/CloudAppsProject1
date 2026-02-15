@@ -41,42 +41,30 @@ apiClient.interceptors.response.use(
 
 export { apiClient };
 
-export const getUserProjects = async (userName: string): Promise<Project[]> => {
-    // const response = await apiClient.get(`/api/projects/${userName}`);
-    // return response.data;
-    return [
-        { name: "Project A", description: "Description A", id: "1" },
-        { name: "Project B", description: "Description B", id: "2" }
-    ];
+export const getUserProjects = async (): Promise<Project[]> => {
+    const response = await apiClient.get('/api/projects');
+    return response.data;
 }
 
 export const createProject = async (project: Project): Promise<Project> => {
-    // const response = await apiClient.post('/api/projects', project);
-    // return response.data;
-    return project
+    const response = await apiClient.post('/api/projects', project);
+    return response.data;
 }
 
-export const joinProject = async (projectId: string, userName: string): Promise<Project> => {
-    // const response = await axios.post(`/api/projects/join`, { projectId, userName });
-    // return response.data;
-    return { name: "Joined Project", description: "Joined Description", id: projectId }
+export const joinProject = async (projectId: string): Promise<Project> => {
+    const response = await apiClient.post('/api/projects/join', { projectId });
+    return response.data;
 }
 
 export const getHardwareResources = async (): Promise<Hardware[]> => {
-    // const response = await axios.get(`/api/hardware/${userName}`);
-    // return response.data;
-    return [
-        { set: "HW Set 1", capacity: 10, available: 6, checkedOut: 4 },
-        { set: "HW Set 2", capacity: 8, available: 3, checkedOut: 5 }
-    ];
+    const response = await apiClient.get('/api/hardware');
+    return response.data;
 }
 
-export const requestHardware = async (requests: { set: string, quantity: number }[]): Promise<void> => {
-    // const response = await axios.post(`/api/hardware/request`, { requests });
-    // return response.data;
+export const requestHardware = async (projectId: string, requests: { set: string, quantity: number }[]): Promise<void> => {
+    await apiClient.post('/api/hardware/request', { projectId, requests });
 }
 
-export const returnHardware = async (returns: { set: string, quantity: number }[]): Promise<void> => {
-    // const response = await axios.post(`/api/hardware/return`, { returns });
-    // return response.data;
+export const returnHardware = async (projectId: string, returns: { set: string, quantity: number }[]): Promise<void> => {
+    await apiClient.post('/api/hardware/return', { projectId, returns });
 }

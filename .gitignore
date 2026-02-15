@@ -1,9 +1,26 @@
+# Environment & Secrets
 .env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.eggs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
 # Nix
-flake.nix
-flake.lock
 .direnv/
 result
 
 # vscode devcontainer
 .devcontainer.env
+
+# OS
+.DS_Store
+Thumbs.db

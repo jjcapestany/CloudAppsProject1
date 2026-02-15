@@ -5,6 +5,7 @@ import { getHardwareResources, requestHardware, returnHardware } from "../client
 export const HardwareManagement = () => {
 
     const [hardwareState, setHardwareState] = useState<Hardware[]>([])
+    const [projectId, setProjectId] = useState<string>("")
     const [setOneRequest, setSetOneRequest] = useState<number>(0)
     const [setTwoRequest, setSetTwoRequest] = useState<number>(0)
     const [setOneReturn, setSetOneReturn] = useState<number>(0)
@@ -16,22 +17,35 @@ export const HardwareManagement = () => {
     }, [])
 
     const onRequestSubmit = () => {
-        requestHardware([
+        requestHardware(projectId, [
             { set: "HW Set 1", quantity: setOneRequest },
             { set: "HW Set 2", quantity: setTwoRequest }
-        ])
+        ]).then(() => getHardwareResources().then(resp => setHardwareState(resp)))
     }
 
     const onReturnSubmit = () => {
-        returnHardware([
-            { set: "HW Set 1", quantity: 0 },
-            { set: "HW Set 2", quantity: 0 }
-        ]).then(() => setReturnFormVisible(false))
+        returnHardware(projectId, [
+            { set: "HW Set 1", quantity: setOneReturn },
+            { set: "HW Set 2", quantity: setTwoReturn }
+        ]).then(() => {
+            setReturnFormVisible(false)
+            getHardwareResources().then(resp => setHardwareState(resp))
+        })
     }
 
     return (
         <div className="grow bg-[#333f48] text-white p-4 gap-4 items-center flex flex-col">
             <span className="text-xl font-bold">Hardware Resource Management</span>
+            <div className="flex flex-col gap-2 items-center">
+                <label className="text-sm">Project ID</label>
+                <input
+                    type="text"
+                    className="border border-[#BF5700] p-2 bg-white text-black rounded"
+                    placeholder="Enter Project ID"
+                    value={projectId}
+                    onChange={(e) => setProjectId(e.target.value)}
+                />
+            </div>
             <table className="border border-white">
                 <thead>
                     <tr className="border border-white">
