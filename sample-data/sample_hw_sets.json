@@ -5,11 +5,11 @@
         "capacity": 100,
         "allocations": [
             {
-                "projectid": "1",
+                "projectid": "proj1",
                 "count": 10
             },
             {
-                "projectid": "3",
+                "projectid": "proj3",
                 "count": 20
             }
         ]
@@ -20,10 +20,10 @@
         "capacity": 100,
         "allocations": [
             {
-                "projectid": "2",
+                "projectid": "proj2",
                 "count": 5
             }
-        ],
+        ]
         
     }
 ]

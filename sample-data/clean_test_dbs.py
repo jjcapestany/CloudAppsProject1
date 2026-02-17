@@ -3,9 +3,13 @@ import test_functions
 def main():
     uri = "mongodb://localhost:27017/"
 
-    users_db_name = "test_db_users"
-    projects_db_name = "test_db_projects"
-    hardware_db_name = "test_db_hardware"
+    # users_db_name = "test_db_users"
+    # projects_db_name = "test_db_projects"
+    # hardware_db_name = "test_db_hardware"
+
+    users_db_name = "myapp"
+    projects_db_name = "myapp"
+    hardware_db_name = "myapp"
     
 
     for db_name in [users_db_name, projects_db_name, hardware_db_name]:
