@@ -19,7 +19,7 @@ __pycache__/
 result
 
 # vscode devcontainer
-.devcontainer.env
+.devcontainer*
 
 # OS
 .DS_Store

@@ -7,9 +7,14 @@ def main():
     uri = "mongodb://localhost:27017/"
 
     # load test data for users collection
-    users_db_name = "test_db_users"
-    projects_db_name = "test_db_projects"
-    hardware_db_name = "test_db_hardware"
+    # users_db_name = "test_db_users"
+    # projects_db_name = "test_db_projects"
+    # hardware_db_name = "test_db_hardware"
+
+    users_db_name = "myapp"
+    projects_db_name = "myapp"
+    hardware_db_name = "myapp"
+
 
     users_collection_name = "users"
     projects_collection_name = "projects"
