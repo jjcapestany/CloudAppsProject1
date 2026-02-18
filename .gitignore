@@ -26,3 +26,5 @@ devcontainer.json
 # OS
 .DS_Store
 Thumbs.db
+api/auth/__pycache__/cipher.cpython-312.pyc
+api/auth/__pycache__/cipher.cpython-312.pyc

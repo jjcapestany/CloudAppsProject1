@@ -80,7 +80,7 @@ def join_project():
         return jsonify({'error': 'Invalid project ID format'}), 400
 
     # Find the project
-    project = current_app.db.projects.find_one({'_id': obj_id})
+    project = current_app.db.projects.find_one({'project_id': obj_id})
     if not project:
         return jsonify({'error': 'Project not found'}), 404
 
@@ -92,7 +92,7 @@ def join_project():
 
     # Add user to members
     current_app.db.projects.update_one(
-        {'_id': obj_id},
+        {'_id': project[obj_id]},
         {'$push': {'members': user_id}}
     )
 
