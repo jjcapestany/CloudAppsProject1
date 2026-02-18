@@ -19,7 +19,7 @@ def get_user_projects():
     result = []
     for project in projects:
         result.append({
-            'id': str(project['_id']),
+            'id': str(project['project_id']),
             'name': project['name'],
             'description': project.get('description', '')
         })
@@ -35,6 +35,7 @@ def create_project():
 
     name = data.get('name', '').strip()
     description = data.get('description', '').strip()
+    project_id = data.get('id', '').strip()
 
     # Validation
     if not name:
@@ -45,6 +46,7 @@ def create_project():
     # Create project document
     project_doc = {
         'name': name,
+        'project_id': project_id,
         'description': description,
         'members': [user_id],  # Creator is first member
         'hw_allocations': []   # No hardware allocated initially
@@ -54,7 +56,7 @@ def create_project():
     project_doc['_id'] = result.inserted_id
 
     return jsonify({
-        'id': str(project_doc['_id']),
+        'id': str(project_doc['project_id']),
         'name': project_doc['name'],
         'description': project_doc['description']
     }), 201

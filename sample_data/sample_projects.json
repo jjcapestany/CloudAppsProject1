@@ -1,17 +1,17 @@
 [ 
     {
         "_id": "1",
-        "projectid": "proj1",
+        "project_id": "proj1",
         "members": ["1", "2"]    
     },
     {
         "_id": "2",
-        "projectid": "proj2",
+        "project_id": "proj2",
         "members": ["1", "2"]    
     },
     {
         "_id": "3",
-        "projectid": "proj3",
+        "project_id": "proj3",
         "members": ["1", "2"]    
     }
 ]
