@@ -12,29 +12,82 @@ export const HardwareManagement = () => {
     const [setTwoReturn, setSetTwoReturn] = useState<number>(0)
     const [returnFormVisible, setReturnFormVisible] = useState<boolean>(false)
 
+    const [message, setMessage] = useState("")
+    const [error, setError] = useState("")
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
     useEffect(() => {
-        getHardwareResources().then(resp => {setHardwareState(resp)})
+        if (!message && !error) return;
+        const timer = setTimeout(() => {
+            setMessage("");
+            setError("");
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, [message, error]);
+
+    useEffect(() => {
+        getHardwareResources()
+        .then(resp => {setHardwareState(resp)})
+        .catch(() => setError("Failed to load Hardware Resources"))
     }, [])
 
-    const onRequestSubmit = () => {
-        requestHardware(projectId, [
-            { set: "HW Set 1", quantity: setOneRequest },
-            { set: "HW Set 2", quantity: setTwoRequest }
-        ]).then(() => getHardwareResources().then(resp => setHardwareState(resp)))
+    const onRequestSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setError("")
+        setMessage("")
+        setIsSubmitting(true)
+
+        try {
+            await requestHardware(projectId, [
+                { set: "HW Set 1", quantity: setOneRequest },
+                { set: "HW Set 2", quantity: setTwoRequest }
+            ])
+            getHardwareResources().then(resp => setHardwareState(resp))
+            setMessage("Hardware requested successfully")
+        } catch (err: unknown) {
+            const error = err as { response?: { data?: { error?: string } } };
+            setError(error.response?.data?.error || 'Failed to request hardware')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
-    const onReturnSubmit = () => {
-        returnHardware(projectId, [
-            { set: "HW Set 1", quantity: setOneReturn },
-            { set: "HW Set 2", quantity: setTwoReturn }
-        ]).then(() => {
-            setReturnFormVisible(false)
+    const onReturnSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setError("")
+        setMessage("")
+        setIsSubmitting(true)
+
+        try {
+            await returnHardware(projectId, [
+                { set: "HW Set 1", quantity: setOneReturn },
+                { set: "HW Set 2", quantity: setTwoReturn }
+            ])
             getHardwareResources().then(resp => setHardwareState(resp))
-        })
+            setMessage("Hardware returned successfully")
+        } catch (err: unknown) {
+            const error = err as { response?: { data?: { error?: string } } };
+            setError(error.response?.data?.error || 'Failed to return hardware')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
         <div className="grow bg-[#333f48] text-white p-4 gap-4 items-center flex flex-col">
+
+            {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    {error}
+                </div>
+            )}
+
+            {message && (
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                    {message}
+                </div>
+            )}
+
             <span className="text-xl font-bold">Hardware Resource Management</span>
             <div className="flex flex-col gap-2 items-center">
                 <label className="text-sm">Project ID</label>

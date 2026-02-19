@@ -40,6 +40,12 @@ def create_project():
     # Validation
     if not name:
         return jsonify({'error': 'Project name is required'}), 400
+    
+    if not description:
+        return jsonify({'error': 'Project description is required'}), 400
+    
+    if not project_id:
+        return jsonify({'error': 'Project ID is required'}), 400
 
     user_id = str(g.current_user['_id'])
 
@@ -73,18 +79,15 @@ def join_project():
     if not project_id:
         return jsonify({'error': 'Project ID is required'}), 400
 
-    # Validate ObjectId format
-    try:
-        obj_id = ObjectId(project_id)
-    except Exception:
-        return jsonify({'error': 'Invalid project ID format'}), 400
-
     # Find the project
-    project = current_app.db.projects.find_one({'project_id': obj_id})
+    project = current_app.db.projects.find_one({'project_id': project_id})
     if not project:
         return jsonify({'error': 'Project not found'}), 404
 
     user_id = str(g.current_user['_id'])
+
+    # Extract the ObjectId for update
+    obj_id = str(project['_id'])
 
     # Check if already a member
     if user_id in project.get('members', []):
@@ -92,12 +95,12 @@ def join_project():
 
     # Add user to members
     current_app.db.projects.update_one(
-        {'_id': project[obj_id]},
+        {'_id': ObjectId(obj_id)},
         {'$push': {'members': user_id}}
     )
 
     return jsonify({
-        'id': str(project['_id']),
+        'id': project['project_id'],
         'name': project['name'],
         'description': project.get('description', '')
     }), 200
