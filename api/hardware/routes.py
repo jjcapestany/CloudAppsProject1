@@ -41,14 +41,8 @@ def request_hardware():
     if not requests:
         return jsonify({'error': 'No hardware requested'}), 400
 
-    # Validate project ID
-    try:
-        proj_obj_id = ObjectId(project_id)
-    except Exception:
-        return jsonify({'error': 'Invalid project ID format'}), 400
-
     # Check project exists and user is a member
-    project = current_app.db.projects.find_one({'_id': proj_obj_id})
+    project = current_app.db.projects.find_one({'project_id': project_id})
     if not project:
         return jsonify({'error': 'Project not found'}), 404
 
@@ -81,16 +75,17 @@ def request_hardware():
         )
 
         # Update project allocation
-        current_app.db.projects.update_one(
-            {'_id': proj_obj_id, 'hw_allocations.hw_set_id': str(hw['_id'])},
+        result = current_app.db.projects.update_one(
+            {'project_id': project_id, 'hw_allocations.hw_id': str(hw['_id'])},
             {'$inc': {'hw_allocations.$.count': quantity}}
         )
 
         # If no existing allocation, add new one
-        result = current_app.db.projects.update_one(
-            {'_id': proj_obj_id, 'hw_allocations.hw_set_id': {'$ne': str(hw['_id'])}},
-            {'$push': {'hw_allocations': {'hw_set_id': str(hw['_id']), 'count': quantity}}}
-        )
+        if result.matched_count == 0:
+            current_app.db.projects.update_one(
+                {'project_id': project_id},
+                {'$push': {'hw_allocations': {'hw_id': str(hw['_id']), 'count': quantity}}}
+            )
 
     return jsonify({'message': 'Hardware checked out successfully'}), 200
 
@@ -110,14 +105,8 @@ def return_hardware():
     if not returns:
         return jsonify({'error': 'No hardware to return'}), 400
 
-    # Validate project ID
-    try:
-        proj_obj_id = ObjectId(project_id)
-    except Exception:
-        return jsonify({'error': 'Invalid project ID format'}), 400
-
     # Check project exists and user is a member
-    project = current_app.db.projects.find_one({'_id': proj_obj_id})
+    project = current_app.db.projects.find_one({'project_id': project_id})
     if not project:
         return jsonify({'error': 'Project not found'}), 404
 
@@ -141,7 +130,7 @@ def return_hardware():
         # Check project has enough allocated
         hw_allocations = project.get('hw_allocations', [])
         allocation = next(
-            (a for a in hw_allocations if a['hw_set_id'] == str(hw['_id'])),
+            (a for a in hw_allocations if a['hw_id'] == str(hw['_id'])),
             None
         )
 
@@ -158,7 +147,7 @@ def return_hardware():
 
         # Update project allocation (decrease)
         current_app.db.projects.update_one(
-            {'_id': proj_obj_id, 'hw_allocations.hw_set_id': str(hw['_id'])},
+            {'project_id': project_id, 'hw_allocations.hw_id': str(hw['_id'])},
             {'$inc': {'hw_allocations.$.count': -quantity}}
         )
 

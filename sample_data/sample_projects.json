@@ -1,17 +1,35 @@
 [ 
     {
         "_id": "1",
-        "projectid": "proj1",
-        "members": ["1", "2"]    
+        "project_id": "proj1",
+        "members": ["1", "2"],
+        "hw_allocations": [
+            {
+                "hw_id": "1",
+                "count": 10
+            }
+        ]    
     },
     {
         "_id": "2",
-        "projectid": "proj2",
-        "members": ["1", "2"]    
+        "project_id": "proj2",
+        "members": ["1", "2"],
+        "hw_allocations": [
+            {
+                "hw_id": "2",
+                "count": 5
+            }
+        ]    
     },
     {
         "_id": "3",
-        "projectid": "proj3",
-        "members": ["1", "2"]    
+        "project_id": "proj3",
+        "members": ["1", "2"],
+        "hw_allocations": [
+            {
+                "hw_id": "1",
+                "count": 2
+            }
+        ]
     }
 ]

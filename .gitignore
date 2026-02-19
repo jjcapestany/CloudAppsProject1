@@ -7,6 +7,7 @@ __pycache__/
 .venv/
 *.egg-info/
 .eggs/
+*.pyc
 
 # IDE
 .idea/
@@ -19,8 +20,11 @@ __pycache__/
 result
 
 # vscode devcontainer
-.devcontainer*
+.devcontainer.env
+devcontainer.json
 
 # OS
 .DS_Store
 Thumbs.db
+api/auth/__pycache__/cipher.cpython-312.pyc
+api/auth/__pycache__/cipher.cpython-312.pyc
