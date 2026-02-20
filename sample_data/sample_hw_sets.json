@@ -1,12 +1,16 @@
 [ 
     {
-        "_id": "1",
+        "_id": {
+            "$oid": "1"
+        },
         "name": "HW Set 1",
         "capacity": 100,
         "available": 90
     },
     {
-        "_id": "2",
+        "_id": {
+            "$oid": "2"
+        },
         "name": "HW Set 2",
         "capacity": 100,
         "available": 93

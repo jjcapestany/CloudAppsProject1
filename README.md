@@ -107,8 +107,8 @@ $ curl http://127.0.0.1:5000/api/test
 | Run frontend | `cd frontend && npm run dev` |
 | Add Python package | `uv add <package>` |
 | Add npm package | `cd frontend && npm install <package>` |
-| Load sample data | `uv run sample_data/load_data.py` |
-| clean dbs (drop myapp db) | `uv run sample_data/clean_dbs.py` |
+| Load sample data | `uv run sample_data.load_data.py` |
+| clean dbs (drop myapp db) | `uv run sample_data.clean_dbs.py` |
 
 ## Production
 

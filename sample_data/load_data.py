@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import json
 from pathlib import Path
-import test_functions
+from . import test_functions
 
 def main():
     uri = "mongodb://localhost:27017/"
