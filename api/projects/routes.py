@@ -62,7 +62,7 @@ def create_project():
     project_doc['_id'] = result.inserted_id
 
     return jsonify({
-        'id': str(project_doc['project_id']),
+        'id': project_doc['project_id'],
         'name': project_doc['name'],
         'description': project_doc['description']
     }), 201

@@ -1,29 +1,18 @@
 [ 
     {
-        "_id": "1",
+        "_id": {
+            "$oid": "1"
+        },
         "name": "HW Set 1",
         "capacity": 100,
-        "allocations": [
-            {
-                "projectid": "proj1",
-                "count": 10
-            },
-            {
-                "projectid": "proj3",
-                "count": 20
-            }
-        ]
+        "available": 90
     },
     {
-        "_id": "2",
+        "_id": {
+            "$oid": "2"
+        },
         "name": "HW Set 2",
         "capacity": 100,
-        "allocations": [
-            {
-                "projectid": "proj2",
-                "count": 5
-            }
-        ]
-        
+        "available": 93
     }
 ]
