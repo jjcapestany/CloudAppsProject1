@@ -74,41 +74,41 @@ export const Projects = () => {
         <div className="grow bg-[#333f48] text-white p-4 gap-4 items-center flex flex-col">
 
             {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <div data-testid="projects-error" className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                     {error}
                 </div>
             )}
 
             {message && (
-                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                <div data-testid="projects-message" className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                     {message}
                 </div>
             )}
 
-            <div className="flex flex-col text-center gap-4">
+            <div data-testid="projects-list" className="flex flex-col text-center gap-4">
                 <span className="text-xl font-bold">My Projects</span>
                 {myProjects.map(p => <span key={p.id}>({p.id}) {p.name}: {p.description}</span>)}
             </div>
-            <button className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold" onClick={() => setIsFormVisible(!isFormVisible)}>
+            <button data-testid="create-project-btn" className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold" onClick={() => setIsFormVisible(!isFormVisible)}>
                 CREATE PROJECT
             </button>
             {isFormVisible &&
-                <div className="flex flex-col gap-4 bg-white  text-black p-4 rounded">
-                    <input className="border border-black p-2 rounded" placeholder="Project Name" onChange={(e) => setNewProject({...newProject, name: e.target.value})}/>
-                    <input className="border border-black p-2 rounded" placeholder="Project Description" onChange={(e) => setNewProject({...newProject, description: e.target.value})}/>
-                    <input className="border border-black p-2 rounded" placeholder="Project ID" onChange={(e) => setNewProject({...newProject, id: e.target.value})}/>
-                    <button className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold text-center mx-auto" onClick={onCreateSubmit}>
+                <div data-testid="create-project-form" className="flex flex-col gap-4 bg-white  text-black p-4 rounded">
+                    <input data-testid="create-project-name" className="border border-black p-2 rounded" placeholder="Project Name" onChange={(e) => setNewProject({...newProject, name: e.target.value})}/>
+                    <input data-testid="create-project-description" className="border border-black p-2 rounded" placeholder="Project Description" onChange={(e) => setNewProject({...newProject, description: e.target.value})}/>
+                    <input data-testid="create-project-id" className="border border-black p-2 rounded" placeholder="Project ID" onChange={(e) => setNewProject({...newProject, id: e.target.value})}/>
+                    <button data-testid="create-project-submit" className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold text-center mx-auto" onClick={onCreateSubmit}>
                         SUBMIT
                     </button>
                 </div>
             }
-            <button className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold" onClick={() => setIsJoinVisible(!isJoinVisible)}>
+            <button data-testid="join-project-btn" className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold" onClick={() => setIsJoinVisible(!isJoinVisible)}>
                 JOIN PROJECT
             </button>
             {isJoinVisible &&
-                <div className="flex flex-col gap-4 bg-white  text-black p-4 rounded">
-                    <input className="border border-black p-2 rounded" placeholder="Project ID" onChange={(e) => setJoinProjectId(e.target.value)}/>
-                    <button className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold text-center mx-auto" onClick={onJoinSubmit}>
+                <div data-testid="join-project-form" className="flex flex-col gap-4 bg-white  text-black p-4 rounded">
+                    <input data-testid="join-project-id" className="border border-black p-2 rounded" placeholder="Project ID" onChange={(e) => setJoinProjectId(e.target.value)}/>
+                    <button data-testid="join-project-submit" className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold text-center mx-auto" onClick={onJoinSubmit}>
                         SUBMIT
                     </button>
                 </div>

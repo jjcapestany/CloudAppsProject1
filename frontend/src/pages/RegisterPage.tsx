@@ -45,13 +45,14 @@ export const RegisterPage = () => {
                 <h2 className="text-2xl font-bold text-center text-[#BF5700] mb-6">Register</h2>
 
                 {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <div data-testid="register-error" className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                         {error}
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4" data-testid="register-form">
                     <input
+                        data-testid="register-email"
                         type="email"
                         placeholder="Email"
                         value={email}
@@ -60,6 +61,7 @@ export const RegisterPage = () => {
                         required
                     />
                     <input
+                        data-testid="register-password"
                         type="password"
                         placeholder="Password"
                         value={password}
@@ -68,6 +70,7 @@ export const RegisterPage = () => {
                         required
                     />
                     <input
+                        data-testid="register-confirm-password"
                         type="password"
                         placeholder="Confirm Password"
                         value={confirmPassword}
@@ -77,6 +80,7 @@ export const RegisterPage = () => {
                     />
 
                     <button
+                        data-testid="register-submit"
                         type="submit"
                         disabled={isSubmitting}
                         className="bg-[#BF5700] text-white p-3 rounded font-bold hover:bg-[#a04a00] disabled:opacity-50"

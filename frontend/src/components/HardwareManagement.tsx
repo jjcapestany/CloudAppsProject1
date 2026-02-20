@@ -77,13 +77,13 @@ export const HardwareManagement = () => {
         <div className="grow bg-[#333f48] text-white p-4 gap-4 items-center flex flex-col">
 
             {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <div data-testid="hardware-error" className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                     {error}
                 </div>
             )}
 
             {message && (
-                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                <div data-testid="hardware-message" className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                     {message}
                 </div>
             )}
@@ -92,6 +92,7 @@ export const HardwareManagement = () => {
             <div className="flex flex-col gap-2 items-center">
                 <label className="text-sm">Project ID</label>
                 <input
+                    data-testid="hardware-project-id"
                     type="text"
                     className="border border-[#BF5700] p-2 bg-white text-black rounded"
                     placeholder="Enter Project ID"
@@ -99,7 +100,7 @@ export const HardwareManagement = () => {
                     onChange={(e) => setProjectId(e.target.value)}
                 />
             </div>
-            <table className="border border-white">
+            <table data-testid="hardware-table" className="border border-white">
                 <thead>
                     <tr className="border border-white">
                         <th className="border border-white p-2">Name</th>
@@ -114,21 +115,21 @@ export const HardwareManagement = () => {
                             <td className="border border-white p-2">{h.set}</td>
                             <td className="border border-white p-2">{h.capacity}</td>
                             <td className="border border-white p-2">{h.available}</td>
-                            <input type="number" className="border border-[#BF5700] p-2 bg-white text-black w-20 mx-auto" placeholder="0" 
+                            <input data-testid={`request-${h.set === "HW Set 1" ? "set1" : "set2"}`} type="number" className="border border-[#BF5700] p-2 bg-white text-black w-20 mx-auto" placeholder="0"
                                 onChange={(e) => h.set === "HW Set 1" ? setSetOneRequest(Number(e.target.value)) : setSetTwoRequest(Number(e.target.value))}/>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <button className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold mt-4" onClick={onRequestSubmit}>
+            <button data-testid="hardware-submit-request" className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold mt-4" onClick={onRequestSubmit}>
                 SUBMIT REQUEST
             </button>
-            <button className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold mt-4" onClick={() => setReturnFormVisible(!returnFormVisible)}>
+            <button data-testid="hardware-return-btn" className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold mt-4" onClick={() => setReturnFormVisible(!returnFormVisible)}>
                 RETURN EQUIPMENT
             </button>
             {returnFormVisible &&
-                <div className="flex flex-col gap-4 bg-white  text-black p-4 rounded">
-                    <table className="border border-black">
+                <div data-testid="hardware-return-form" className="flex flex-col gap-4 bg-white  text-black p-4 rounded">
+                    <table data-testid="hardware-return-table" className="border border-black">
                         <thead>
                             <tr className="border border-black">
                                 <th className="border border-black p-2">Name</th>
@@ -141,13 +142,13 @@ export const HardwareManagement = () => {
                                 <tr key={h.set} className="border border-black">
                                     <td className="border border-black p-2">{h.set}</td>
                                     <td className="border border-black p-2">{h.checkedOut}</td>
-                                    <input type="number" className="border border-[#BF5700] p-2 bg-white text-black w-20 mx-auto" placeholder="0" 
+                                    <input data-testid={`return-${h.set === "HW Set 1" ? "set1" : "set2"}`} type="number" className="border border-[#BF5700] p-2 bg-white text-black w-20 mx-auto" placeholder="0"
                                         onChange={(e) => h.set === "HW Set 1" ? setSetOneReturn(Number(e.target.value)) : setSetTwoReturn(Number(e.target.value))}/>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <button className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold text-center mx-auto" onClick={onReturnSubmit}>
+                    <button data-testid="hardware-return-submit" className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer font-bold text-center mx-auto" onClick={onReturnSubmit}>
                         SUBMIT
                     </button>
                 </div>

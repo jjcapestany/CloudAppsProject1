@@ -37,13 +37,14 @@ export const LoginPage = () => {
                 <h2 className="text-2xl font-bold text-center text-[#BF5700] mb-6">Login</h2>
 
                 {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <div data-testid="login-error" className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                         {error}
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4" data-testid="login-form">
                     <input
+                        data-testid="login-email"
                         type="email"
                         placeholder="Email"
                         value={email}
@@ -52,6 +53,7 @@ export const LoginPage = () => {
                         required
                     />
                     <input
+                        data-testid="login-password"
                         type="password"
                         placeholder="Password"
                         value={password}
@@ -75,6 +77,7 @@ export const LoginPage = () => {
                     </div>
 
                     <button
+                        data-testid="login-submit"
                         type="submit"
                         disabled={isSubmitting}
                         className="bg-[#BF5700] text-white p-3 rounded font-bold hover:bg-[#a04a00] disabled:opacity-50"

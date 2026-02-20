@@ -17,9 +17,10 @@ export const LoginButton = () => {
     return (
         <div className="flex items-center gap-4">
             {isAuthenticated && user && (
-                <span className="text-[#BF5700] text-sm">{user.email}</span>
+                <span data-testid="user-email" className="text-[#BF5700] text-sm">{user.email}</span>
             )}
             <button
+                data-testid="login-logout-btn"
                 className="flex bg-[#BF5700] text-white p-2 rounded cursor-pointer w-40 font-bold"
                 onClick={handleClick}
             >
