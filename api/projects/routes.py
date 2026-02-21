@@ -47,6 +47,11 @@ def create_project():
     if not project_id:
         return jsonify({'error': 'Project ID is required'}), 400
 
+    # Check if project exists
+    project = current_app.db.projects.find_one({'project_id': project_id})
+    if project:
+        return jsonify({'error': 'Project already exists'}), 400
+    
     user_id = str(g.current_user['_id'])
 
     # Create project document
